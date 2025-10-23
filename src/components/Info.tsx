@@ -26,7 +26,7 @@ const logoVariants = {
         x: "-50%",
         y: "0%",
         opacity: 1,
-        scale: 0.4,
+        scale: 0.3,
         transition: { duration: 0.8, ease: "easeInOut" as const }
     },
     final: {
@@ -49,13 +49,13 @@ const tierVariants = {
         rotate: 0,
     },
     scrolled: {
-        right: "4%",
-        top: "35%",
+        right: "6%",
+        top: "30%",
         left: "auto",
         bottom: "auto",
         opacity: 1,
         rotate: 0,
-        scale: 0.3,
+        scale: 0.2,
         transition: {
             duration: 0, ease: "easeInOut" as const,
             scale: { duration: 0, delay: 0, ease: "easeInOut" as const },
@@ -97,8 +97,8 @@ const btnVariants = {
         }
     },
     scrolled: {
-        top: "32%",
-        right: "4%",
+        top: "27%",
+        right: "7%",
         left: "auto",
         bottom: "auto",
         opacity: 1,
@@ -115,9 +115,9 @@ const textVariants = {
     },
     scrolled: {
         opacity: 1,
-        y: "-150%",
+        y: "-160%",
         x: "15%",
-        scale: 0.8,
+        scale: 0.7,
         transition: {
             duration: 1, ease: "easeInOut" as const,
         }
