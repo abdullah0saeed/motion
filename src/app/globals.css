@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-aloevera-light: "aloeveraLight";
+  --font-inter: "Inter";
 }
 
 @theme inline {
@@ -10,6 +12,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* custom colors */
+  --color-deep-red: #4f0007;
+  --color-orange: #e5522a;
+  --color-deep-move: #1b0e1d;
+  --color-light-blue: #b4ccc7;
+  --color-ivory: #fffff0;
+  --color-black: #000000;
+  --color-black-overlay: #1e1e1e;
+  --color-active-tab: #f4f4f4;
+  /* custom fonts */
+  --font-aloevera-light: var(--font-aloevera-light);
+  --font-inter: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
