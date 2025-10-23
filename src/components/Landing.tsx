@@ -1,35 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { LazyVideo } from "./LazyVideo";
 import { motion } from "framer-motion";
+import { useCallback, useState, useEffect } from "react";
+import { LazyGif } from "./LazyGif";
 
 interface LandingProps {
     onVideoReady: () => void;
 }
 
 export default function Landing({ onVideoReady }: LandingProps) {
+    const [loadedCount, setLoadedCount] = useState(0);
+
+    const handleVideoReady = useCallback(() => {
+        console.log('GIF loaded, count:', loadedCount + 1);
+        setLoadedCount(prev => {
+            const newCount = prev + 1;
+            if (newCount === 6) {
+                console.log('All GIFs loaded, triggering background');
+                // Small delay to ensure all animations are ready
+                setTimeout(() => {
+                    onVideoReady();
+                }, 100);
+            }
+            return newCount;
+        });
+    }, [onVideoReady, loadedCount]);
+
+
+
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            {/* Videos Container */}
+            {/* GIFs Container */}
             <motion.div
-                className="flex justify-start items-center gap-5 max-w-screen ml-40 z-10"
+                className="flex justify-start items-center gap-10 max-w-screen ml-90 z-10"
                 initial={{ x: 0 }}
                 animate={{ x: -200 }}
-                transition={{ duration: 1.5, ease: "easeInOut", delay: 4 }}
+                transition={{
+                    duration: 1.5,
+                    ease: "easeInOut",
+                    delay: 4,
+                }}
             >
-                {[...Array(6)].map((_, i) => (
-                    <LazyVideo
-                        key={i}
-                        src={`/videos/video.webm`}
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        className="w-[408px] h-[500px]"
-                        index={i}
-                        onReady={onVideoReady}
-                    />
+                {[...Array(5)].map((_, i) => (
+                    <div key={i} className="w-[400px] h-[500px] shrink-0">
+                        <LazyGif
+                            src={`/gifs/video.gif`}
+                            alt={`Animation ${i + 1}`}
+                            className="w-full h-full object-cover"
+                            index={i}
+                            onReady={handleVideoReady}
+                        />
+                    </div>
                 ))}
             </motion.div>
 
@@ -50,7 +72,13 @@ export default function Landing({ onVideoReady }: LandingProps) {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1 }}
             >
-                <Image src="/logo.png" alt="logo" width={500} height={200} />
+                <Image
+                    src="/logo.png"
+                    alt="logo"
+                    width={500}
+                    height={200}
+                    priority
+                />
             </motion.div>
         </div>
     )

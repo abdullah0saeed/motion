@@ -17,12 +17,26 @@ export default function Home() {
 
   useEffect(() => {
     if (videosReady === totalVideos) {
+      console.log('All videos ready via callback');
       setAllVideosLoaded(true);
     }
   }, [videosReady]);
 
+  // Fallback: if GIFs don't trigger onLoad properly, show background after 4 seconds
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (!allVideosLoaded) {
+        console.log('Fallback timer triggered - showing background');
+        setAllVideosLoaded(true);
+      }
+    }, 4000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [allVideosLoaded]);
+
+
   return (
-    <>
+    <div className="flex flex-col h-screen bg-black">
       <header>
         <NavBar />
       </header>
@@ -37,12 +51,12 @@ export default function Home() {
             className="absolute inset-0 bg-orange z-0"
             initial={{ scaleY: 0, originY: 1 }}
             animate={allVideosLoaded ? { scaleY: 1 } : { scaleY: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut", delay: 4 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           />
 
           <Landing onVideoReady={handleVideoReady} />
         </main>
       </div>
-    </>
+    </div>
   );
 }
