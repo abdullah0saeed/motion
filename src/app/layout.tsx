@@ -26,8 +26,8 @@ const aloeveraLight = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "Media Zone",
-  description: "Media Zone Task",
+  title: "Motion",
+  description: "Motion Project",
 };
 
 export default function RootLayout({
