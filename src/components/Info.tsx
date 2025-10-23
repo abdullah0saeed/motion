@@ -39,7 +39,7 @@ export default function Info() {
             </motion.div>
 
             {/* Text */}
-            <motion.p className="absolute bottom-6 left-18 w-[75%] font-aloevera-light text-[34.64px] text-start text-white z-10"
+            <motion.p className="absolute bottom-6 left-20 w-[60%] font-aloevera-light text-[34.64px] text-start text-white/60 z-10"
                 initial={{
                     opacity: 0,
                     y: "100%",
