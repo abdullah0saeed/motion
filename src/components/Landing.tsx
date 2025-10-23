@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCallback, useState, useEffect } from "react";
 import { LazyGif } from "./LazyGif";
@@ -53,32 +52,6 @@ export default function Landing({ onVideoReady }: LandingProps) {
                         />
                     </div>
                 ))}
-            </motion.div>
-
-            <motion.div
-                className="absolute bottom-4 right-12 z-10"
-                initial={{ y: 200, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-            >
-                <p className="text-[41px] font-aloevera-light text-white">
-                    Find the Right Part, <br /><span className="font-bold">Every Time</span>
-                </p>
-            </motion.div>
-
-            <motion.div
-                className="absolute bottom-4 left-12 z-10"
-                initial={{ y: 200, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1 }}
-            >
-                <Image
-                    src="/logo.png"
-                    alt="logo"
-                    width={500}
-                    height={200}
-                    priority
-                />
             </motion.div>
         </div>
     )
