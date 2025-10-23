@@ -1,5 +1,6 @@
 "use client";
 
+import CardsContainer from "@/components/CardsContainer";
 import Info from "@/components/Info";
 import Landing from "@/components/Landing";
 import NavBar from "@/components/NavBar";
@@ -101,6 +102,7 @@ export default function Home() {
 
           <Info finalAnimation={finalAnimation} isScrolled={isScrolled} />
 
+          <CardsContainer isScrolled={isScrolled} />
         </main>
       </div >
     </div >
