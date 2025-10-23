@@ -56,7 +56,7 @@ export default function Info() {
             </motion.p>
 
             {/* Button */}
-            <motion.button className="absolute bottom-10 right-24 cursor-pointer shadow-sm shadow-orange-btn p-1 px-4 font-aloevera-light text-[24.99px] text-start bg-orange-btn text-white rounded-[36px] z-10"
+            <motion.button className="absolute bottom-10 right-24 cursor-pointer shadow-sm shadow-orange-btn p-1 px-6 font-aloevera-light text-[22px] text-start bg-orange-btn text-white rounded-[36px] z-10"
                 initial={{
                     opacity: 0
                 }}
