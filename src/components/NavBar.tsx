@@ -34,22 +34,8 @@ const navVariants = {
 };
 
 
-export default function NavBar() {
+export default function NavBar({ isScrolled }: { isScrolled: boolean }) {
     const pathname = usePathname();
-
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 0);
-        };
-        // Attach the scroll event listener
-        window.addEventListener("scroll", handleScroll);
-        // CleanUp
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
 
     return (
         <div className="flex justify-center">

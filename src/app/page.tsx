@@ -5,13 +5,14 @@ import Landing from "@/components/Landing";
 import NavBar from "@/components/NavBar";
 import SideBar from "@/components/SideBar";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [allVideosLoaded, setAllVideosLoaded] = useState(false);
   const [videosReady, setVideosReady] = useState(0);
   const [finalAnimation, setFinalAnimation] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const totalVideos = 6;
 
   const handleVideoReady = () => {
@@ -20,7 +21,6 @@ export default function Home() {
 
   useEffect(() => {
     if (videosReady === totalVideos) {
-      console.log('All videos ready via callback');
       setAllVideosLoaded(true);
       // Wait for everything to complete, then trigger final animation
       setTimeout(() => {
@@ -33,7 +33,6 @@ export default function Home() {
   useEffect(() => {
     const fallbackTimer = setTimeout(() => {
       if (!allVideosLoaded) {
-        console.log('Fallback timer triggered - showing background');
         setAllVideosLoaded(true);
         setTimeout(() => {
           setFinalAnimation(true);
@@ -44,11 +43,24 @@ export default function Home() {
     return () => clearTimeout(fallbackTimer);
   }, [allVideosLoaded]);
 
+  // Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+    // CleanUp
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   return (
-    <div className="flex flex-col h-screen bg-black">
+    <div className={`flex flex-col bg-black ${finalAnimation ? "min-h-[calc(100vh+10px)]" : "min-h-screen"}`}>
       <header>
-        <NavBar />
+        <NavBar isScrolled={isScrolled} />
       </header>
       <div className="flex flex-col h-screen">
         <aside className="z-20">
@@ -87,40 +99,10 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Logo */}
-          <motion.div
-            className="absolute bottom-4 left-12 z-10"
-            initial={{ y: 200, opacity: 0 }}
-            animate={finalAnimation ? {
-              // Move to center
-              bottom: "auto",
-              left: "50%",
-              top: "50%",
-              x: "-50%",
-              y: "-50%",
-              opacity: 1,
-              transition: { duration: 1.5, ease: "easeInOut" }
-            } : {
-              // Original position
-              y: 0,
-              opacity: 1,
-              transition: { duration: 3, delay: 3 }
-            }}
-          >
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width={500}
-              height={200}
-              priority
-            />
-          </motion.div>
-
-          <Info />
-
+          <Info finalAnimation={finalAnimation} isScrolled={isScrolled} />
 
         </main>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
